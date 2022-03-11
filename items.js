@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const data = require('./data');
-const images_2d = require('./images_2d');
 
 let cont = 0
 
@@ -35,7 +34,7 @@ router.get('./getimages/:id',async (req,res) => {
 
 router.post('/create',async (req,res) => {
     if (req.body.name && req.body.level && req.body.description && req.body.image && req.body.sell_price) {
-        data.items.push({name:req.body.name,level:req.body.level,name:req.body.description,name:req.body.image,name:req.body.sell_price,id:cont++})
+        data.items.push({name:req.body.name,level:req.body.level,description:req.body.description,image:req.body.image,sell_price:req.body.sell_price,id:cont++})
         console.log(data)
         res.status(200).json({message: 'Success'}) 
     }else{

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const data = require('./data');
-const models_3d = require('./models_3d');
 
 let cont = 0
 
@@ -35,7 +34,7 @@ router.get('./getmodel/:id',async (req,res) => {
 
 router.post('/create',async (req,res) => {
     if (req.body.name && req.body.stats && req.body.level && req.body.title && req.body.model) {
-        data.characters.push({name:req.body.name,stats:req.body.stats,name:req.body.level,name:req.body.title,name:req.body.model,id:cont++})
+        data.characters.push({name:req.body.name,stats:req.body.stats,level:req.body.level,title:req.body.title,model:req.body.model,id:cont++})
         console.log(data)
         res.status(200).json({message: 'Success'}) 
     }else{
