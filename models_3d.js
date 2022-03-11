@@ -22,7 +22,7 @@ router.get('/:id',async (req,res) => {
     } 
 });
 
-app.post('/create',async (req,res) => {
+router.post('/create',async (req,res) => {
     if (req.body.address) {
         data.mission_objectives.push({address:req.body.address,id:cont++})
         console.log(data)
@@ -33,7 +33,7 @@ app.post('/create',async (req,res) => {
        
 });
 
-app.delete('delete/:id',async (req,res) => {
+router.delete('delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.mission_objectives,"id",id)){
         let index = data.mission_objectives.indexOf(find(data.mission_objectives,"id",id))

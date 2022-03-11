@@ -33,7 +33,7 @@ router.get('./getimages/:id',async (req,res) => {
     } 
 });
 
-app.post('/create',async (req,res) => {
+router.post('/create',async (req,res) => {
     if (req.body.name && req.body.level && req.body.description && req.body.image && req.body.sell_price) {
         data.items.push({name:req.body.name,level:req.body.level,name:req.body.description,name:req.body.image,name:req.body.sell_price,id:cont++})
         console.log(data)
@@ -44,7 +44,7 @@ app.post('/create',async (req,res) => {
        
 });
 
-app.delete('delete/:id',async (req,res) => {
+router.delete('delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.items,"id",id)){
         data.deleted_items.push(find(data.items,"id",id))
@@ -56,7 +56,7 @@ app.delete('delete/:id',async (req,res) => {
     }
 });
 
-app.patch('update/:key',async (req,res) => {
+router.patch('update/:key',async (req,res) => {
     let key=req.params.key
     let index = data.items.indexOf(find(data.items,"id",req.body.id))
     data.items[index][key]=req.body[key]
@@ -64,7 +64,7 @@ app.patch('update/:key',async (req,res) => {
     res.status(200).json({message: 'Success'})    
 });
 
-app.post('/restore/:id',async (req,res) => {
+router.post('/restore/:id',async (req,res) => {
     let id = req.params.id
     if (find(data.deleted_items,"id",id)) {
         data.items.push(find(data.deleted_items,"id",id))

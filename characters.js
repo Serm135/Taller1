@@ -33,7 +33,7 @@ router.get('./getmodel/:id',async (req,res) => {
     } 
 });
 
-app.post('/create',async (req,res) => {
+router.post('/create',async (req,res) => {
     if (req.body.name && req.body.stats && req.body.level && req.body.title && req.body.model) {
         data.characters.push({name:req.body.name,stats:req.body.stats,name:req.body.level,name:req.body.title,name:req.body.model,id:cont++})
         console.log(data)
@@ -44,7 +44,7 @@ app.post('/create',async (req,res) => {
        
 });
 
-app.delete('delete/:id',async (req,res) => {
+router.delete('delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.characters,"id",id)){
         let index = data.characters.indexOf(find(data.characters,"id",id))
@@ -55,7 +55,7 @@ app.delete('delete/:id',async (req,res) => {
     }
 });
 
-app.patch('update/:key',async (req,res) => {
+router.patch('update/:key',async (req,res) => {
     let key=req.params.key
     let index = data.characters.indexOf(find(data.characters,"id",req.body.id))
     data.characters[index][key]=req.body[key]
