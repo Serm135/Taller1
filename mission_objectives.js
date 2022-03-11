@@ -37,7 +37,7 @@ app.delete('delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.mission_objectives,"id",id)){
         let index = data.mission_objectives.indexOf(find(data.mission_objectives,"id",id))
-        data.mission_objectives.splice(index,index)
+        data.mission_objectives.splice(index,1)
         res.status(200).json({message: 'Success'})
     }else{
         res.status(204).json({message:'No Content'})

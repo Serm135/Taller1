@@ -5,8 +5,8 @@ const data = require('./data');
 let cont = 0
 
 router.get('/',async (req,res) => {
-    if (data.mission_objectives.length!=0) {
-        res.status(200).json(data.mission_objectives)
+    if (data.models_3d.length!=0) {
+        res.status(200).json(data.models_3d)
     }else{
         res.status(204).json({message:'No Content'})
     }
@@ -14,7 +14,7 @@ router.get('/',async (req,res) => {
 
 router.get('/:id',async (req,res) => {
     let id = req.params.id
-    us=find(data.mission_objectives,"id",id)
+    us=find(data.models_3d,"id",id)
     if (us) {
         res.status(200).json(us)
     }else{
@@ -24,7 +24,7 @@ router.get('/:id',async (req,res) => {
 
 router.post('/create',async (req,res) => {
     if (req.body.address) {
-        data.mission_objectives.push({address:req.body.address,id:cont++})
+        data.models_3d.push({address:req.body.address,id:cont++})
         console.log(data)
         res.status(200).json({message: 'Success'}) 
     }else{
@@ -35,9 +35,9 @@ router.post('/create',async (req,res) => {
 
 router.delete('delete/:id',async (req,res) => {
     let id = req.params.id
-    if(find(data.mission_objectives,"id",id)){
-        let index = data.mission_objectives.indexOf(find(data.mission_objectives,"id",id))
-        data.mission_objectives.splice(index,index)
+    if(find(data.models_3d,"id",id)){
+        let index = data.models_3d.indexOf(find(data.models_3d,"id",id))
+        data.models_3d.splice(index,1)
         res.status(200).json({message: 'Success'})
     }else{
         res.status(204).json({message:'No Content'})

@@ -48,7 +48,7 @@ router.delete('delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.characters,"id",id)){
         let index = data.characters.indexOf(find(data.characters,"id",id))
-        data.characters.splice(index,index)
+        data.characters.splice(index,1)
         res.status(200).json({message: 'Success'})
     }else{
         res.status(204).json({message:'No Content'})

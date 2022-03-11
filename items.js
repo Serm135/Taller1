@@ -49,7 +49,7 @@ router.delete('delete/:id',async (req,res) => {
     if(find(data.items,"id",id)){
         data.deleted_items.push(find(data.items,"id",id))
         let index = data.items.indexOf(find(data.items,"id",id))
-        data.items.splice(index,index)
+        data.items.splice(index,1)
         res.status(200).json({message: 'Success'})
     }else{
         res.status(204).json({message:'No Content'})
