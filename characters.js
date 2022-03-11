@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const data = require('./data');
-const images_2d = require('./images_2d');
+const models_3d = require('./models_3d');
 
 let cont = 0
 
 router.get('/',async (req,res) => {
-    if (data.items.length!=0) {
-        res.status(200).json(data.items)
+    if (data.characters.length!=0) {
+        res.status(200).json(data.characters)
     }else{
         res.status(204).json({message:'No Content'})
     }
@@ -15,7 +15,7 @@ router.get('/',async (req,res) => {
 
 router.get('/:id',async (req,res) => {
     let id = req.params.id
-    us=find(data.items,"id",id)
+    us=find(data.characters,"id",id)
     if (us) {
         res.status(200).json(us)
     }else{
@@ -23,10 +23,10 @@ router.get('/:id',async (req,res) => {
     } 
 });
 
-router.get('./getimages/:id',async (req,res) => {
+router.get('./getmodel/:id',async (req,res) => {
     let id = req.params.id
-    us=find(data.items,"id",id).image
-    if (find(data.images_2d,"model",us)) {
+    us=find(data.characters,"id",id).model
+    if (find(data.models_3d,"model",us)) {
         res.status(200).json(us)
     }else{
         res.status(204).json({message:'No Content'})
@@ -34,8 +34,8 @@ router.get('./getimages/:id',async (req,res) => {
 });
 
 app.post('/create',async (req,res) => {
-    if (req.body.name && req.body.level && req.body.description && req.body.image && req.body.sell_price) {
-        data.items.push({name:req.body.name,level:req.body.level,name:req.body.description,name:req.body.image,name:req.body.sell_price,id:cont++})
+    if (req.body.name && req.body.stats && req.body.level && req.body.title && req.body.model) {
+        data.characters.push({name:req.body.name,stats:req.body.stats,name:req.body.level,name:req.body.title,name:req.body.model,id:cont++})
         console.log(data)
         res.status(200).json({message: 'Success'}) 
     }else{
@@ -46,10 +46,9 @@ app.post('/create',async (req,res) => {
 
 app.delete('delete/:id',async (req,res) => {
     let id = req.params.id
-    if(find(data.items,"id",id)){
-        data.deleted_items.push(find(data.items,"id",id))
-        let index = data.items.indexOf(find(data.items,"id",id))
-        data.items.splice(index,index)
+    if(find(data.characters,"id",id)){
+        let index = data.characters.indexOf(find(data.characters,"id",id))
+        data.characters.splice(index,index)
         res.status(200).json({message: 'Success'})
     }else{
         res.status(204).json({message:'No Content'})
@@ -58,22 +57,10 @@ app.delete('delete/:id',async (req,res) => {
 
 app.patch('update/:key',async (req,res) => {
     let key=req.params.key
-    let index = data.items.indexOf(find(data.items,"id",req.body.id))
-    data.items[index][key]=req.body[key]
+    let index = data.characters.indexOf(find(data.characters,"id",req.body.id))
+    data.characters[index][key]=req.body[key]
     console.log(data)
     res.status(200).json({message: 'Success'})    
-});
-
-app.post('/restore/:id',async (req,res) => {
-    let id = req.params.id
-    if (find(data.deleted_items,"id",id)) {
-        data.items.push(find(data.deleted_items,"id",id))
-        console.log(data)
-        res.status(200).json({message: 'Success'}) 
-    }else{
-        res.status(400).json({message: 'Bad Request'})
-    }
-       
 });
 
 function find(lista,key,id) {

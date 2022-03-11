@@ -24,7 +24,7 @@ router.get('/:id',async (req,res) => {
 
 app.post('/create',async (req,res) => {
     if (req.body.address) {
-        data.mission_objectives.push({user:req.body.address,id:cont++})
+        data.mission_objectives.push({address:req.body.address,id:cont++})
         console.log(data)
         res.status(200).json({message: 'Success'}) 
     }else{
