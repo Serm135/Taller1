@@ -25,7 +25,6 @@ router.get('/:id',async (req,res) => {
 router.post('/create',async (req,res) => {
     if (req.body.name && req.body.description && req.body.count && req.body.mission) {
         data.mission_objectives.push({name:req.body.name,description:req.body.description,count:req.body.count,mission:req.body.mission,id:cont++})
-        console.log(data)
         res.status(200).json({message: 'Success'})
     }else{
         res.status(400).json({message: 'Bad Request'})
@@ -49,7 +48,6 @@ router.patch('/update/:key',async (req,res) => {
     let key=req.params.key
     let index = data.mission_objectives.indexOf(find(data.mission_objectives,"id",req.body.id))
     data.mission_objectives[index][key]=req.body[key]
-    console.log(data)
     res.status(200).json({message: 'Success'})    
 });
 

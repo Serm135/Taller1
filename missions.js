@@ -26,7 +26,6 @@ router.get('/',async (req,res) => {
 router.get('/:id',async (req,res) => {
     let id = req.params.id
     us=find(data.missions,"id",id)
-    console.log(id)
     if (us) {
         temp=[]
         temp.push(us)
@@ -49,7 +48,6 @@ router.post('/create',async (req,res) => {
     if (req.body.name && req.body.description && req.body.level_reward && req.body.level_requirement && req.body.quest_giver_character) {
         data.missions.push({name:req.body.name,description:req.body.description,level_reward:req.body.level_reward
                         ,level_requirement:req.body.level_requirement,quest_giver_character:req.body.quest_giver_character,id:cont++})
-        console.log(data)
         res.status(200).json({message: 'Success'}) 
     }else{
         res.status(400).json({message: 'Bad Request'})
@@ -70,7 +68,6 @@ router.patch('/update/:key',async (req,res) => {
     let key=req.params.key
     let index = data.missions.indexOf(find(data.missions,"id",req.body.id))
     data.missions[index][key]=req.body[key]
-    console.log(data)
     res.status(200).json({message: 'Success'})    
 });
 function find(lista,key,id) {

@@ -30,6 +30,7 @@ const data = {
         mission: 'La derrota',
         id: 1
       }
-    ]
+    ],
+    players: []
   }
 module.exports = data

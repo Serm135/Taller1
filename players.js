@@ -23,9 +23,10 @@ router.get('/:id',async (req,res) => {
 });
 
 router.post('/create',async (req,res) => {
-    if (req.body.name && req.body.last_login && req.body.password && req.body.username) {
-        data.players.push({name:req.body.name,last_login:req.body.last_login,password:req.body.password,username:req.body.username,id:cont++})
-        console.log(data)
+    if (req.body.name && req.body.password && req.body.username) {
+        hoy = new Date()
+        fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear()
+        data.players.push({name:req.body.name,last_login:fecha,password:req.body.password,username:req.body.username,id:cont++})
         res.status(200).json({message: 'Success'}) 
     }else{
         res.status(400).json({message: 'Bad Request'})
@@ -33,7 +34,7 @@ router.post('/create',async (req,res) => {
        
 });
 
-router.delete('delete/:id',async (req,res) => {
+router.delete('/delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.players,"id",id)){
         let index = data.players.indexOf(find(data.players,"id",id))
@@ -44,11 +45,10 @@ router.delete('delete/:id',async (req,res) => {
     }
 });
 
-router.patch('update/:key',async (req,res) => {
+router.patch('/update/:key',async (req,res) => {
     let key=req.params.key
     let index = data.players.indexOf(find(data.players,"id",req.body.id))
     data.players[index][key]=req.body[key]
-    console.log(data)
     res.status(200).json({message: 'Success'})    
 });
 
