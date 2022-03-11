@@ -4,4 +4,6 @@ const app = express();
 app.use(express.json())
 
 const characters = require('./characters')
-app.use('/personas',rutas1)
+app.use('/characters',characters)
+
+app.listen(8080);
