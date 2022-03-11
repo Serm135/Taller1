@@ -33,7 +33,7 @@ router.post('/create',async (req,res) => {
        
 });
 
-router.delete('delete/:id',async (req,res) => {
+router.delete('/delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.character_stats,"id",id)){
         let index = data.character_stats.indexOf(find(data.character_stats,"id",id))
@@ -44,7 +44,7 @@ router.delete('delete/:id',async (req,res) => {
     }
 });
 
-router.patch('update/:key',async (req,res) => {
+router.patch('/update/:key',async (req,res) => {
     if (key=='life' || key == 'power' || key == 'magic') {
         res.status(204).json({message:'No es posible modificar estos campos'})
     }else{

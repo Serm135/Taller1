@@ -33,7 +33,7 @@ router.post('/create',async (req,res) => {
        
 });
 
-router.delete('delete/:id',async (req,res) => {
+router.delete('/delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.models_3d,"id",id)){
         let index = data.models_3d.indexOf(find(data.models_3d,"id",id))
@@ -42,6 +42,14 @@ router.delete('delete/:id',async (req,res) => {
     }else{
         res.status(204).json({message:'No Content'})
     }
+});
+
+router.patch('/update/:key',async (req,res) => {
+    let key=req.params.key
+    let index = data.models_3d.indexOf(find(data.items,"id",req.body.id))
+    data.models_3d[index][key]=req.body[key]
+    console.log(data)
+    res.status(200).json({message: 'Success'})    
 });
 
 function find(lista,key,id) {

@@ -33,7 +33,7 @@ router.post('/create',async (req,res) => {
        
 });
 
-router.delete('delete/:id',async (req,res) => {
+router.delete('/delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.players,"id",id)){
         let index = data.players.indexOf(find(data.players,"id",id))
@@ -44,7 +44,7 @@ router.delete('delete/:id',async (req,res) => {
     }
 });
 
-router.patch('update/:key',async (req,res) => {
+router.patch('/update/:key',async (req,res) => {
     let key=req.params.key
     let index = data.players.indexOf(find(data.players,"id",req.body.id))
     data.players[index][key]=req.body[key]

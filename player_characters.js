@@ -43,7 +43,7 @@ router.post('/create',async (req,res) => {
        
 });
 
-router.delete('delete/:id',async (req,res) => {
+router.delete('/delete/:id',async (req,res) => {
     let id = req.params.id
     if(find(data.player_characters,"id",id)){
         let index = data.player_characters.indexOf(find(data.player_characters,"id",id))
@@ -54,7 +54,7 @@ router.delete('delete/:id',async (req,res) => {
     }
 });
 
-router.patch('update/:key',async (req,res) => {
+router.patch('/update/:key',async (req,res) => {
     if (key=='player') {
         res.status(204).json({message:'No es posible modificar el dueño de un personaje'})
     }else{
